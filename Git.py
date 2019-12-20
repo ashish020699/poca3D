@@ -1,1 +1,1 @@
-print (First step towards GitHub) 
+print 'First step towards GitHub'
