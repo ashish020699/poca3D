@@ -10,13 +10,14 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 headers = ["px","py","pz","pux","puy","puz","qx","qy","qz","vux","vuy","vuz","c1","c2"]
-df = pd.read_csv("SingleBlock2.txt",delimiter=" ",names = headers)
+df = pd.read_csv("SingleBlock.txt",delimiter=" ",names = headers)
 
 xList=[]
 yList=[]
 zList=[]
 
 x1 = scatter3D(100,100,100)
+x1.counter = 0 
 for index in range(df.shape[0]):
     if((index%1000)==0):
         print("Num of Events processed : "+str(index)) 
@@ -50,9 +51,9 @@ for index in range(df.shape[0]):
     #print(po_sc)
     
     poca=po_sc[0]
-    #truePositive=x1.Dimension(poca)
-    if (poca.x<x1.x and poca.x >-x1.x)and (poca.z<x1.z and poca.z >-x1.z)and (poca.z<x1.z and poca.z >-x1.z):
-    #if(truePositive):
+    truePositive=x1.Dimension(poca)
+    #if (poca.x<x1.x and poca.x >-x1.x)and (poca.z<x1.z and poca.z >-x1.z)and (poca.z<x1.z and poca.z >-x1.z):
+    if(truePositive):
       xList.append(poca.x)
       yList.append(poca.y)
       zList.append(poca.z)
@@ -74,22 +75,24 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 #cm = plt.get_cmap("RdYlGn")   to get red yellow green
-#cm = plt.get_cmap("Spectral")
+cm = plt.get_cmap("Spectral")
 xArray = np.array(xList)
 yArray = np.array(yList)
 zArray = np.array(zList)
 
 N = len(xList)
-
 col=np.arange(N)
 
 #print len(xArray)
 #print len(yArray)
 #print len(zArray)
 #plt.scatter (xArray,yArray,s=1,c=col,cmap=cm) for 2D scatter plot
-#ax.scatter(xArray,yArray,zArray,s=1,c=col,cmap=cm)  #for 3D scatter plot
-ax.scatter(xArray,yArray,zArray,s=1)  #for 3D scatter plot
+ax.scatter(xArray,yArray,zArray,s=1,c=col,cmap=cm)  #for 3D scatter plot
+#ax.scatter(xArray,yArray,zArray,s=1)  #for 3D scatter plot
 plt.show()
+
+
+
 
 
 

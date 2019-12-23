@@ -17,7 +17,7 @@ class POCA:
    def Point3DPoca(self,p,u,q,v):
 
     ang=u.angle(v)
-    print("Angle : "+str(ang))
+    #print("Angle : "+str(ang))
     if(ang < 0.001):
         return Point3D(0,0,0),Point3D(0,0,0),Point3D(0,0,0)
     pdotv=p.dot(v)
