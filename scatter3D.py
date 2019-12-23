@@ -16,13 +16,13 @@ class scatter3D:
          print (self.x,self.y,self.z)
     
     def Dimension(self,poca):
-         poca.show()
+         #poca.show()
          if (((poca.x < self.x) and (poca.x > -self.x)) and ((poca.y < self.y) and (poca.y > -self.y)) and ((poca.z < self.z) and (poca.z > -self.z))) :
             self.counter = self.counter +1
-            print(True)
+            #print(True)
             return  True
          else : 
-            print(False)
+           #print(False)
             return False
        
 
