@@ -1,3 +1,12 @@
+'''
+This Code uses TrackExact.txt consisting of 99k rows and 14 columns 
+First 12 columns are x,y,z coordinates of vectors p,pu,q and vu respectively
+We need to find u and v  to find Poca 
+so,
+u1 = pu-p and v1 = vu-q
+now, Unit vectors of u1 and v1 will give us 'u' and 'v' so that we can plot 'IterativePoca' accurately.
+Point3DPocaIterative method of class POCA is used to calculate IterativePoca
+'''
 import pandas as pd 
 from Point3D import *
 from Point3Dimport import *
@@ -10,16 +19,16 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 headers = ["px","py","pz","pux","puy","puz","qx","qy","qz","vux","vuy","vuz","c1","c2"]
-df = pd.read_csv("SingleBlock.txt",delimiter=" ",names = headers)
+df = pd.read_csv("TrackExact.txt",delimiter=" ",names = headers)
+print(df.shape)
 
 xList=[]
 yList=[]
 zList=[]
 
-x1 = scatter3D(100,100,100)
-x1.counter = 0 
+x1 = Point3D(100,100,100)
 for index in range(df.shape[0]):
-    if((index%1000)==0):
+    if((index%9000)==0):
         print("Num of Events processed : "+str(index)) 
     row=df.iloc[index]
     #print row
@@ -46,27 +55,24 @@ for index in range(df.shape[0]):
     #v.show()
         
     pocaPt = POCA()
-    po_sc = pocaPt.Point3DPoca(p,u,q,v)
+    po_sc = pocaPt.Point3DPocaIterative(p,u,q,v)
     #print(type(po_sc))
     #print(po_sc)
     
     poca=po_sc[0]
-    truePositive=x1.Dimension(poca)
-    #if (poca.x<x1.x and poca.x >-x1.x)and (poca.z<x1.z and poca.z >-x1.z)and (poca.z<x1.z and poca.z >-x1.z):
-    if(truePositive):
-      xList.append(poca.x)
-      yList.append(poca.y)
-      zList.append(poca.z)
-    '''
-    poca=po_sc[0]
-    if(poca.x < x1.x/2 and poca.x > -x1.x/2) and (poca.y < x1.y/2 and poca.y > -x1.y/2) and (poca.z < x1.z/2 and poca.z > -x1.z/2):
+    #truePositive=x1.Dimension(poca)
+
+
+    #if(poca.x < x1.x and poca.x > -x1.x) and (poca.y < x1.y and poca.y > -x1.y) and (poca.z < x1.z and poca.z > -x1.z): //used for box of given dimensions
+    #if(truePositive)
+    if (poca.z<450 and poca.z>-450):
      xList.append(poca.x)
      yList.append(poca.y)
      zList.append(poca.z)
-    '''
+  
 
-print("Counter : "+str(x1.counter))
-
+#print("Counter : "+str(x1.counter))
+print ("Counter :" +str(len(xList)))
 
 
 
@@ -74,25 +80,23 @@ print("Counter : "+str(x1.counter))
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-#cm = plt.get_cmap("RdYlGn")   to get red yellow green
+#cm = plt.get_cmap("RdYlGn")   #to get red yellow green
 cm = plt.get_cmap("Spectral")
 xArray = np.array(xList)
 yArray = np.array(yList)
 zArray = np.array(zList)
 
-N = len(xList)
-col=np.arange(N)
+#N = (xList)
+
+#col=np.arange(N)
 
 #print len(xArray)
 #print len(yArray)
 #print len(zArray)
-#plt.scatter (xArray,yArray,s=1,c=col,cmap=cm) for 2D scatter plot
-ax.scatter(xArray,yArray,zArray,s=1,c=col,cmap=cm)  #for 3D scatter plot
-#ax.scatter(xArray,yArray,zArray,s=1)  #for 3D scatter plot
+#plt.scatter (xArray,yArray,s=1,c=col,cmap=cm
+ax.scatter(xArray,yArray,zArray,s=1,c=xList) #,cmap=cm)  #for 3D scatter plot
+#ax.scatter(xArray,yArray,zArray,s=1)  #for 3D scatter plot with default colors
 plt.show()
-
-
-
 
 
 

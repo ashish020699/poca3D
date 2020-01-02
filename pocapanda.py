@@ -1,3 +1,12 @@
+'''
+This Code uses TrackExact.txt consisting of 99k rows and 14 columns 
+First 12 columns are x,y,z coordinates of vectors p,pu,q and vu respectively
+We need to find u and v  to find Poca 
+so,
+u1 = pu-p and v1 = vu-q
+now, Unit vectors of u1 and v1 will give us u and v so that we can plot Poca accurately.
+Point3DPoca method of class POCA is used to calculate Poca
+'''
 import pandas as pd 
 from Point3D import *
 from Point3Dimport import *
@@ -31,18 +40,14 @@ for index in range(df.shape[0]):
     vu = Point3D(row[9],row[10],row[11])
     #vu.show()
     p21 = pu-p
-    #p21.show()
-    #t = p21.Magnitude()
-    #print t
-   
+  
     p43 =(vu-q)
     #p43.show()
     u = p21.Unit()
     #u.show()
-    #print ("v is :")
+    
     v = p43.Unit()
     #v.show()
-    #print('POCA')
     x = POCA()
     #x.Point3DPoca(p,u,q,v).show()
     pocaPt = x.Point3DPoca(p,u,q,v)
@@ -51,11 +56,11 @@ for index in range(df.shape[0]):
         xList.append(pocaPt[0].x)
         yList.append(pocaPt[0].y)
         zList.append(pocaPt[0].z)
-#plt.scatter([row[13],row[14]],color=['red'],)
+#plt.scatter([row[13],row[14]],color=['red'])
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-#cm = plt.get_cmap("RdYlGn")   to get red yellow green
+#cm = plt.get_cmap("RdYlGn") to get red yellow green
 cm = plt.get_cmap("Spectral")
 xArray = np.array(xList)
 yArray = np.array(yList)
@@ -64,10 +69,7 @@ zArray = np.array(zList)
 N = len(xList)
 col=np.arange(N)
 
-#print len(xArray)
-#print len(yArray)
-#print len(zArray)
-#plt.scatter (xArray,yArray,s=1,c=col,cmap=cm) for 3D scatter plot
+#plt.scatter (xArray,yArray,s=1,c=col,cmap=cm) for 2D scatter plot
 ax.scatter(xArray,yArray,zArray,s=1,c=col,cmap=cm)  #for 3D scatter plot
 plt.show()
 
