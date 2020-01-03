@@ -1,3 +1,8 @@
+'''
+This Code consists of various methods under class Point3D to calculate Poca Points which we are going to read using pandas.
+Operator Overloading is used as well.
+
+'''
 import math
 class Point3D:
     x=0.0
@@ -30,10 +35,6 @@ class Point3D:
     def __sub__(self,other):
         return Point3D(self.x - other.x , self.y - other.y , self.z - other.z)
 
-    def ADD(self,other):
-        #print("ADD Called.........")
-        return Point3D(self.x + other.x , self.y + other.y , self.z + other.z)
-
     def angle(self,other):
         cosTheta = self.dot(other)/(self.Magnitude()*other.Magnitude())
         theta = cosTheta
@@ -60,15 +61,17 @@ def midpoint(p1, p2):
 
 if __name__== "__main__":
     p1 = Point3D(4,2,-6)
-    p1.show()
+    #p1.show()
 
     p2 = Point3D(10,-16,6)
-    p2.show()
+    #p2.show()
     
     #midpoint(p1,p2).show()
     
     a = Point3D(4,6,8)
+    #a.show()
     b = Point3D(2,2,2)
+    #b.show()
     x = 2
     div = a/x
     #div.show()
@@ -85,8 +88,8 @@ if __name__== "__main__":
     
     t = a.Unit()
     #t.show()
-    p1.trisect1(p2).show()
-    p1.trisect2(p2).show()
+    #p1.trisect1(p2).show()
+    #p1.trisect2(p2).show()
 
 
 
