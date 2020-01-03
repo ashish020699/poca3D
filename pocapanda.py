@@ -51,6 +51,7 @@ for index in range(df.shape[0]):
     x = POCA()
     #x.Point3DPoca(p,u,q,v).show()
     pocaPt = x.Point3DPoca(p,u,q,v)
+    
     #pocaPt.show()
     if(pocaPt[0].z < 450 and pocaPt[0].z > -450):
         xList.append(pocaPt[0].x)

@@ -2,7 +2,7 @@
 This Code uses NewFilteredPoca.txt File containing around 20.9k rows and 5 columns ... 
 Columns 1-3 contain x,y,z axes of Poca Points 
 Column 4 contains scattering distance which can be used as color for Plotting 
-Multiple Poca points are  being Displayed and a scatterplot is generated
+Multiple Poca points are  being Displayed and a scatterplot is generated in 3D
 
 '''
 import pandas as pd 

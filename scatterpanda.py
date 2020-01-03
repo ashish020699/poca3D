@@ -56,6 +56,7 @@ for index in range(df.shape[0]):
         
     pocaPt = POCA()
     po_sc = pocaPt.Point3DPocaIterative(p,u,q,v)
+    
     #print(type(po_sc))
     #print(po_sc)
     
@@ -86,15 +87,15 @@ xArray = np.array(xList)
 yArray = np.array(yList)
 zArray = np.array(zList)
 
-#N = (xList)
+N =len(xList)
 
-#col=np.arange(N)
+col=np.arange(N)
 
 #print len(xArray)
 #print len(yArray)
 #print len(zArray)
 #plt.scatter (xArray,yArray,s=1,c=col,cmap=cm
-ax.scatter(xArray,yArray,zArray,s=1,c=xList) #,cmap=cm)  #for 3D scatter plot
+ax.scatter(xArray,yArray,zArray,s=1,c=col,cmap=cm)  #for 3D scatter plot
 #ax.scatter(xArray,yArray,zArray,s=1)  #for 3D scatter plot with default colors
 plt.show()
 
